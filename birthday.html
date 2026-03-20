@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise 🎉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  overflow-x: hidden;
+  text-align: center;
+  color: white;
+}
+
+/* Slideshow */
+.slideshow {
+  position: relative;
+  max-width: 400px;
+  margin: 40px auto;
+}
+
+.slide {
+  display: none;
+}
+
+.slide img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  animation: fade 1.5s;
+}
+
+@keyframes fade {
+  from {opacity: 0.4;}
+  to {opacity: 1;}
+}
+
+/* Button */
+button {
+  padding: 12px 25px;
+  font-size: 18px;
+  border-radius: 25px;
+  border: none;
+  background: #ff4081;
+  color: white;
+  cursor: pointer;
+  margin: 15px;
+}
+
+/* Message */
+#message {
+  display: none;
+  max-width: 700px;
+  margin: 20px auto;
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-radius: 15px;
+}
+
+/* Secret */
+#secretBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#secretMessage {
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  color: black;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎂 Happy Birthday 💖</h1>
+
+<!-- Slideshow -->
+<div class="slideshow">
+  <div class="slide"><img src="img1.jpg"></div>
+  <div class="slide"><img src="img2.jpg"></div>
+  <div class="slide"><img src="img3.jpg"></div>
+  <div class="slide"><img src="img4.jpg"></div>
+  <div class="slide"><img src="img5.jpg"></div>
+</div>
+
+<button onclick="start()">Click for Surprise 🎁</button>
+
+<div id="message"></div>
+
+<!-- Secret Button -->
+<button id="secretBtn" onclick="showSecret()">🎁</button>
+
+<div id="secretMessage">
+  🤫 Secret Message 💖<br><br>
+  You are seriously one of the best persons in my life 🥺✨<br>
+  Don't change ever 💯🔥
+</div>
+
+<!-- Music -->
+<audio id="music" src="https://www.bensound.com/bensound-music/bensound-birthday.mp3"></audio>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+// Slideshow
+let index = 0;
+showSlides();
+
+function showSlides() {
+  let slides = document.getElementsByClassName("slide");
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  index++;
+  if (index > slides.length) {index = 1;}
+  slides[index-1].style.display = "block";
+  setTimeout(showSlides, 2500);
+}
+
+// Surprise
+function start() {
+  document.getElementById("music").play();
+
+  // Confetti 🎉
+  setInterval(() => {
+    confetti({
+      particleCount: 100,
+      spread: 70
+    });
+  }, 1500);
+
+  // Typing message
+  const text = `😂 Heyyyyy!
+
+U r my support system 🤝💖  
+But also irritation king 😠🤣  
+
+2 years friendship 🗓️  
+Full fights + fun 💥😂  
+
+If I say NO ❌  
+You: SAY YES 😤  
+
+Still can't leave you 💖  
+Stay forever like this ♾️  
+
+Happy Birthday Mentall 🎂🔥`;
+
+  let i = 0;
+  let speed = 30;
+  let msgDiv = document.getElementById("message");
+  msgDiv.style.display = "block";
+  msgDiv.innerHTML = "";
+
+  function typing() {
+    if (i < text.length) {
+      msgDiv.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+
+  typing();
+}
+
+// Secret message
+function showSecret() {
+  document.getElementById("secretMessage").style.display = "block";
+}
+</script>
+
+</body>
+</html>
